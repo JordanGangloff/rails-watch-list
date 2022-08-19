@@ -14,18 +14,18 @@
 require 'rest-client'
 require 'json'
 
-List.create(name: 'My very first list')
+# List.create(name: 'My very first list')
 
 # TODO: Write a seed to insert 10 posts in the database fetched from the Hacker News API.
 movies = RestClient.get 'https://tmdb.lewagon.com/movie/top_rated'
 movies_array = JSON.parse(movies)
 # => repos is an `Array` of `Hashes`.
 
-movies_array.first(10).each do |s|
+movies_array['results'].last(10).each do |s|
   movie = Movie.new(
     title: s['title'],
     overview: s['overview'],
-    poster_url: s["https://image.tmdb.org/t/p/w500#{poster_path}"]
+    poster_url: "https://image.tmdb.org/t/p/w500#{s['poster_path']}"
   )
   movie.save!
 end

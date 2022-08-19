@@ -11,7 +11,13 @@
   </head>
 
   <body>
-  <%= link_to 'Lists', lists_path %>
-    <%= yield %>
+    <div class="m-3">
+
+      <div class='navbar'>
+        <%= link_to 'Lists', lists_path, class: 'btn btn-info', type: 'button' %>
+      </div>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
