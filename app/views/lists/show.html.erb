@@ -6,6 +6,8 @@
 
 <ul>
   <% @list.movies.each do |movie| %>
-    <li> <%= movie.title %> - <%= movie.overview %></li>
+  <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+    <li class='card'> <%= movie.title %> - <%= movie.overview %> --- <%= bookmark.comment %>
+    <%= link_to "delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{movie.title} from #{@list.name}?"}, class: 'text-danger' %> </li>
   <% end %>
 </ul>
